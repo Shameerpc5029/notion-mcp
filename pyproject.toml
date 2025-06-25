@@ -1,0 +1,23 @@
+[project]
+name = "notion-mcp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.9.4",
+    "python-dotenv>=1.1.1",
+    "requests>=2.32.4",
+]
+[project.scripts]
+notion-mcp = "main:run"
+
+[tool.uv]
+package = true
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["main"]
