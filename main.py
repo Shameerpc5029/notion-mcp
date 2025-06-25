@@ -87,10 +87,17 @@ class NotionClient:
                 
         except Exception as e:
             raise NotionAuthError(f"Failed to get credentials from Nango: {str(e)}")
+
+    def _update_nango_token(self) -> None:
+        token = self._get_nango_token()
+        if token:
+            self.auth_token = token
+            self.headers["Authorization"] = f"Bearer {self.auth_token}"
     
     def _make_request(self, method: str, endpoint: str, data: Optional[Dict] = None, params: Optional[Dict] = None) -> Dict:
         """Make HTTP request to Notion API"""
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
+        self._update_nango_token()
         
         max_retries = 3
         retry_count = 0
